@@ -2,6 +2,10 @@ const cron = require('node-cron');
 const fs = require('fs');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
+const express = require('express');
+const app = express();
+
+const PORT = process.env.PORT || 3000;
 
 const client = new Client({
     authStrategy: new LocalAuth({
@@ -90,6 +94,13 @@ client.on('ready', async () => {
         }
     });
 
+    app.get('/', (req, res) => {
+    res.send('Birthday Bot funcionando 🚀');
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor escuchando en puerto ${PORT}`);
+});
 });
 
 client.initialize();
